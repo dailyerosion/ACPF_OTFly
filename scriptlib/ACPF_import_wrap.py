@@ -20,6 +20,10 @@ import sys, os, shutil
 
 from .acpfOTF1 import main as main1
 from .acpfOTF2a import main as main2a
+from .acpfOTF2b import main as main2b
+from .acpfOTF3 import main as main3
+from .acpfOTF5 import main as main5
+from .acpfOTF7a import main as main7a
 
 #arcpy.SetLogHistory(False)
 # Local
@@ -65,61 +69,22 @@ def main(prjName, inHUC12list):
 
             ##------------------------------------------------------------------------------
             # Use BUF to extract 8 years of land use from nationalACPF
-            callstr3 = "python D:\\ACPFdevelop\\ACPF_OTFly\\scriptlib\\2b_assignHUC12_byFieldLandUse.py %s %s" %(inHUC,prjProcFolder)
-            proc3 = subprocess.run(callstr3, shell=True)
-            
-            if proc3.returncode == 0:
-                print('LU2 OK')
-            else:
-                print('{0} procLU failed!'.format(inHUC))
-                sys.exit()
-
-            del(proc3)
+            main2b(inHUC,prjProcFolder)
             
             ##------------------------------------------------------------------------------
             # Use BUF to extract soils data from nationalACPF
-            callstr4 = "python D:\\ACPFdevelop\\ACPF_OTFly\\scriptlib\\3_extract_ACPFgSSURGO.py %s %s" %(inHUC,prjProcFolder)
-            proc4 = subprocess.run(callstr4, shell=True)
-            
-            if proc4.returncode == 0:
-                print('gSSURGO OK')
-            else:
-                print('{0} soils failed!'.format(inHUC))
-                sys.exit()
-
-            del(proc4)
+            main3(inHUC,prjProcFolder)
 
             ##------------------------------------------------------------------------------
             # Update Metadata
-            callstr5 = "python D:\\ACPFdevelop\\ACPF_OTFly\\scriptlib\\5_ACPF_MetadataImporterPro.py %s %s" %(inHUC,prjProcFolder)
-            proc5 = subprocess.run(callstr5, shell=True)
-            
-            if proc5.returncode == 0:
-                print('metadata OK')
-            else:
-                print('{0} meta failed!'.format(inHUC))
-                sys.exit()
-                
-            del(proc5)
-                
-            del(inHUC)
+            main5(inHUC,prjProcFolder)
         else:
             print("Named Watershed is improperly formed: %s" % inHUC)
 
 
     ##########################################################################
     # Project
-    callstr6 = "python D:\\ACPFdevelop\\ACPF_OTFly\\scriptlib\\7a_prjUTMzone.py %s %s" %(prjName, prjProcFolder)
-    proc6 = subprocess.run(callstr6, shell=True)
-    
-    if proc6.returncode == 0:
-        print('Project OK')
-    else:
-        print('{0} Project FGDBs failed!'.format(prjName))
-        sys.exit()
-        
-    del(proc6)
-
+    main7a(prjName, prjProcFolder)
 
 
     ##########################################################################
