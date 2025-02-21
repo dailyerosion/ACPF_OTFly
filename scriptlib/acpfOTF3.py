@@ -111,10 +111,7 @@ def makeACPFsoilsTables(ACPFsoilDB, muRows, FileGDB,inHUC):
 ##------------------------------------------------------------------------------
 ##------------------------------------------------------------------------------
 
-if __name__ == "__main__":
-    
-    inHUC = sys.argv[1]
-    prjProcFolder = sys.argv[2]
+def main(inHUC, prjProcFolder):
     
     HUC12status = r"D:\ACPFdevelop\ACPF_OTFly\nationalACPF\ACPF2023_Basedata.gdb\US48_HUC12_2023"
     ACPFsoilRas =  r"D:\ACPFdevelop\ACPF_OTFly\nationalACPF\ACPF_Soils\US_gSSURGOmosaic.gdb\ua4810m"
@@ -138,4 +135,5 @@ if __name__ == "__main__":
     env.workspace = ""
 
     
-
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2])

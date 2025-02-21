@@ -79,10 +79,7 @@ def fgdbProject(FGDBList, outProjectDir):
 ##------------------------------------------------------------------------------
 ##------------------------------------------------------------------------------
 
-if __name__ == "__main__":
-    
-    prjName = sys.argv[1]
-    prjProcFolder = sys.argv[2]
+def main(prjName, prjProcFolder):
 
     acpfHUC12 = r"D:\ACPFdevelop\ACPF_OTFly\nationalACPF\ACPF2023_Basedata.gdb\US48_HUC12_2023"
     outProjectDir = r"D:\ACPFdevelop\ACPF_OTFly\outgoingDir\%s" %(prjName)
@@ -103,6 +100,6 @@ if __name__ == "__main__":
     del(FGDBList)
 
 
-        
-
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2])
     
